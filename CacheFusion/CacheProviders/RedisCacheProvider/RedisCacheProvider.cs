@@ -1,4 +1,5 @@
-﻿using StackExchange.Redis;
+﻿using Newtonsoft.Json;
+using StackExchange.Redis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,15 +30,18 @@ namespace CacheFusion.CacheProviders.RedisCacheProvider
             try
             {
                 var value = await _database.StringGetAsync(key);
-                return value.IsNull ? default : (T)Convert.ChangeType(value.ToString(), typeof(T));
+                if (value.IsNull) return default;
+
+                return typeof(T).IsPrimitive
+                    ? (T)Convert.ChangeType(value.ToString(), typeof(T))
+                    : JsonConvert.DeserializeObject<T>(value);
             }
             catch (RedisException ex)
             {
                 throw new InvalidOperationException("Error retrieving data from Redis.", ex);
             }
-
-
         }
+
 
         public async Task SetAsync<T>(string key, T value, TimeSpan? expiresIn = null)
         {
@@ -45,10 +49,12 @@ namespace CacheFusion.CacheProviders.RedisCacheProvider
             {
                 throw new ArgumentNullException(nameof(key), "Key cannot be null or empty.");
             }
+
             try
             {
+                RedisValue redisValue = value is null ? RedisValue.Null
+                    : typeof(T).IsPrimitive ? value.ToString() : JsonConvert.SerializeObject(value);
 
-                RedisValue redisValue = value is null ? RedisValue.Null : value.ToString();
                 if (expiresIn.HasValue)
                 {
                     await _database.StringSetAsync(key, redisValue, expiresIn);
@@ -58,11 +64,12 @@ namespace CacheFusion.CacheProviders.RedisCacheProvider
                     await _database.StringSetAsync(key, redisValue);
                 }
             }
-            catch(RedisException ex)
+            catch (RedisException ex)
             {
                 throw new InvalidOperationException("Error setting data in Redis.", ex);
             }
         }
+
 
         public async Task<bool> ExistsAsync(string key)
         {
@@ -70,7 +77,15 @@ namespace CacheFusion.CacheProviders.RedisCacheProvider
             {
                 throw new ArgumentNullException(nameof(key), "Key cannot be null or empty.");
             }
-            return await _database.KeyExistsAsync(key);
+
+            try
+            {
+                return await _database.KeyExistsAsync(key);
+            }
+            catch (RedisException ex)
+            {
+                throw new InvalidOperationException("Error checking key existence in Redis.", ex);
+            }
         }
 
         public async Task<bool> RemoveAsync(string key)
@@ -79,16 +94,19 @@ namespace CacheFusion.CacheProviders.RedisCacheProvider
             {
                 throw new ArgumentNullException(nameof(key), "Key cannot be null or empty.");
             }
+
             try
             {
                 return await _database.KeyDeleteAsync(key);
             }
             catch (RedisException ex)
             {
-                throw new InvalidOperationException("Error removing data from Redis.", ex);
+                throw new InvalidOperationException("Error removing key from Redis.", ex);
             }
 
         }
+
+        
 
         // IRedisCacheProvider methods
         public async Task<bool> SetAsync<T>(string key, T value, TimeSpan? expiresIn = null, When when = When.Always, CommandFlags flags = CommandFlags.None)

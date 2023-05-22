@@ -12,6 +12,8 @@ public void ConfigureServices(IServiceCollection services)
     services.AddSingleton<ICacheProviderAbstractFactory<IMemoryCacheProvider, MemoryCacheProviderOptions>, MemoryCacheProviderFactory>();
 }
 
+```
+
  ## Usage
 
 Once you've added the `MemoryCacheProviderFactory` to your `Startup.cs` file, you can inject the `IMemoryCacheProvider` into your classes. You can use dependency injection to get an instance of IMemoryCacheProvider in your controllers or other services.
@@ -30,6 +32,8 @@ public class MyController : ControllerBase
     
     // Controller methods here...
 }
+
+```
 
  ## Methods
 

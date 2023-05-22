@@ -12,6 +12,7 @@ public void ConfigureServices(IServiceCollection services)
     services.AddSingleton<IConnectionMultiplexerFactory, ConnectionMultiplexerFactory>();
     services.AddSingleton<ICacheProviderAbstractFactory<IRedisCacheProvider, RedisCacheProviderOptions>, RedisCacheProviderFactory>();
 }
+```
 
 ## Usage
 
@@ -34,6 +35,8 @@ public class MyController : ControllerBase
     
     // Controller methods here...
 }
+
+```
 
 ## Methods
 

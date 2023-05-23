@@ -20,5 +20,5 @@ CacheFusion is a versatile and extensible caching library for .NET applications.
 
 This project supports several different cache providers:
 
-- [Memory Cache Provider](/MemoryCacheProvider/README.md) - A caching solution that stores data in memory.
-- [Redis Cache Provider](/RedisCacheProvider/README.md) - A caching solution that uses a Redis server.
+- [Memory Cache Provider](/CacheFusion/CacheProviders/MemoryCacheProvider/README.md) - A caching solution that stores data in memory.
+- [Redis Cache Provider](/CacheFusion/CacheProviders/RedisCacheProvider/README.md) - A caching solution that uses a Redis server.

@@ -15,3 +15,10 @@ CacheFusion is a versatile and extensible caching library for .NET applications.
 - **Thread-Safe Operations:** CacheFusion ensures thread safety during cache operations, making it suitable for multi-threaded applications.
 
 - **Extensibility:** Developers can easily extend CacheFusion by implementing additional cache providers or customizing existing ones to meet specific application needs.
+
+## Cache Providers
+
+This project supports several different cache providers:
+
+- [Memory Cache Provider](/MemoryCacheProvider/README.md) - A caching solution that stores data in memory.
+- [Redis Cache Provider](/RedisCacheProvider/README.md) - A caching solution that uses a Redis server.

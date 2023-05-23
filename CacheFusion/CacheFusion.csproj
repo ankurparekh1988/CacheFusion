@@ -4,6 +4,26 @@
     <TargetFramework>net6.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <!-- NuGet package related properties -->
+    <PackageId>CacheFusion</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Ankur Parekh</Authors>
+    <Description>"CacheFusion is a comprehensive caching library for .NET applications, providing an abstraction layer over popular caching services such as Redis, In-Memory, NCache, and Couchbase. The library simplifies cache operations, enabling developers to switch between different caching solutions with minimal code changes. It supports a variety of caching operations including basic CRUD operations, advanced key-value operations, and list and hash operations. CacheFusion is ideal for applications requiring high performance, scalability, and flexibility in their caching layer"</Description>
+    <Copyright>© 2023 [Ankur Parekh]</Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <!-- or whatever license you're using -->
+    <PackageProjectUrl>https://github.com/ankurparekh1988/CacheFusion</PackageProjectUrl>
+    <!-- replace with your repository URL -->
+    <RepositoryUrl>https://github.com/ankurparekh1988/CacheFusion</RepositoryUrl>
+    <!-- replace with your repository URL -->
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>cache fusion redis memory</PackageTags>
+    <PackageReleaseNotes>Initial release of CacheFusion</PackageReleaseNotes>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    
+    
   </PropertyGroup>
 
   <ItemGroup>

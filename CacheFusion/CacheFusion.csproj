@@ -39,8 +39,8 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="README.md" Pack="true" PackagePath="" />
-    <None Include="CacheFusion/CacheProviders/MemoryCacheProvider/README.md" Pack="true" PackagePath="CacheFusion/CacheProviders/MemoryCacheProvider" />
-    <None Include="CacheFusion/CacheProviders/RedisCacheProvider/README.md" Pack="true" PackagePath="CacheFusion/CacheProviders/RedisCacheProvider" />
+    <Content Include="../CacheFusion/CacheProviders/MemoryCacheProvider/README.md" Pack="true" PackagePath="CacheProviders/MemoryCacheProvider"/>
+    <None Include="../CacheFusion/CacheProviders/RedisCacheProvider/README.md" Pack="true" PackagePath="CacheProviders/RedisCacheProvider" />
   </ItemGroup>
 
 </Project>
